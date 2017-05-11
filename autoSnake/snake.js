@@ -21,7 +21,8 @@ function Snake(){
 		
 		for(var i = 0; i < this.tail.length; i++){
 			var pos = this.tail[i];
-			if(this.position.equals(pos)){
+			var d = dist(this.position.x, this.position.y, pos.x, pos.y);
+			if(d<1){
 				this.die();
 			}
 		}
@@ -74,7 +75,7 @@ function Snake(){
 	
 	this.show = function(){
 		fill(200, 40, 200);
-		noStroke();
+		stroke(255);
 		for(var i = 0; i < this.total; i++){
 			rect(this.tail[i].x, this.tail[i].y, scl, scl);
 		}
@@ -82,11 +83,44 @@ function Snake(){
 		rect(this.position.x, this.position.y, scl, scl);
 	}
 	
-	this.stop = function(){
-		this.xspeed = 0;
-		this.yspeed = 0;
-		printlocations();
+	this.randomMovement = function(){
+	var movement = createVector(this.xspeed, this.yspeed);
+	
+	var array = [];
+	append(array, createVector(-1,0));
+	append(array, createVector(1,0));
+	append(array, createVector(0,-1));
+	append(array, createVector(0,1));
+	
+	this.position.x >= width-1 || this.position.x < 0 || this.position.y >= height-1 || this.position.y < 0
+	
+	if(movement.equals(left)){
+		var temparray = array;
+		temparray.splice(2, 1);
+		
+		if(checkUpper) temparray.splice()
+		
+		
+	} else if(movement.equals(right)){
+		
+	} else if(movement.equals(up)){
+		
+	} else {
+		
+	}
 	}
 	
-	
+}
+
+function checkUpper(pos){
+	return (pos.y === 0);
+}
+function checkLower(pos){
+	return (pos.y === height - scl);
+}
+function checkRight(pos){
+	return (pos.x === width - scl);
+}
+function checkLeft(pos){
+	return (pos.x === 0);
 }

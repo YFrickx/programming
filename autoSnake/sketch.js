@@ -1,7 +1,7 @@
 var s;
 var p;
 var w;
-var scl = 16;
+var scl = 15;
 
 var food;
 var numPoison = 20;
@@ -14,7 +14,7 @@ function setup() {
 	p = new Poison();
 	w = new Wall();
 	
-	frameRate(60);
+	frameRate(15);
 	food = pickLocation();
 	p.populateList(numPoison);
 }
@@ -25,10 +25,8 @@ function pickLocation(){
 	var rows = floor(height/scl);
 	object = createVector(floor(random(cols)), floor(random(rows)));
 	object.mult(scl);
-	if(object.equals(food)) object = pickLocation();
-	print(object);
-	if(p.checkPos(object) >= 0) object = pickLocation();
-	print(object);
+	if(object.equals(food)) object = pickLocation;
+	if(p.checkPos(object) >= 0) object = pickLocation;
 	return object;
 }
 
@@ -44,14 +42,9 @@ function draw() {
 		p.eat(index);
 	}
 	
-	if(s.xspeed === 0 && s.yspeed ===0){
-		//Nop
-	}
-	else{
-		s.death();
-		s.update();	
-	}
 	
+	s.death();
+	s.update();
 	p.show();
 	s.show();
 	
@@ -61,36 +54,9 @@ function draw() {
 	}
 	
 	fill(0,200,40);
-	noStroke();
+	stroke(0,200,40);
 	rect(food.x, food.y, scl, scl);
 	
 	
 	
-	
-}
-
-function printlocations(){
-	print("food:");
-	print(food.x, food.y);
-	print("poison:");
-	p.printlist();
-}
-
-function keyPressed() {
-	if (keyCode === UP_ARROW){
-		s.dir(0,-1);
-	}
-	else if (keyCode === DOWN_ARROW){
-		s.dir(0,1);
-	}
-	else if (keyCode === LEFT_ARROW){
-		s.dir(-1,0);
-	}
-	else if (keyCode === RIGHT_ARROW){
-		s.dir(1,0);
-	} else if(keyCode === ENTER){
-		s.stop();
-	} else if(keyCode === SHIFT){
-		food = pickLocation();
-	}
 }

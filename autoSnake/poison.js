@@ -10,16 +10,15 @@ function Poison(){
 	}
 	
 	this.checkPos = function(pos){
-		print(pos);
 		for(var i = 0; i < this.list.length; i++){
-			if(this.list[i].equals(pos)) return i;
+			if(dist(this.list[i].x, this.list[i].y, pos.x, pos.y) < 1) return i;
 		}
 		return -1;
 	}
 	
 	this.show = function(){		
 		fill(200,0,0);
-		noStroke();
+		stroke(200,0,0);
 		for(var i = 0; i < this.list.length; i++){
 			rect(this.list[i].x, this.list[i].y, scl, scl);
 		}
@@ -29,11 +28,5 @@ function Poison(){
 		this.list[index] = pickLocation();
 	}
 	
-	this.printlist = function(){
-		for(var i = 0; i < this.list.length; i++){
-			print(this.list[i].x, this.list[i].y)
-		}
-		
-	}
 	
 }
